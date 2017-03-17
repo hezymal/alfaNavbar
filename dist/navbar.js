@@ -173,7 +173,7 @@ if (typeof Object.create !== 'function') {
 
 
     var TopNavBar = function() {
-        var $parent, minTop, height;
+        var $parent, min_top, height;
         var last_scrolled = 0, last_top = 0;
 
         return {
@@ -182,7 +182,7 @@ if (typeof Object.create !== 'function') {
             },
 
             reset: function(navbar) {
-                minTop = navbar.$element.offset().top;
+                min_top = navbar.$element.offset().top;
                 height = navbar.$element.outerHeight();
             },
 
@@ -192,7 +192,7 @@ if (typeof Object.create !== 'function') {
                 if (last_scrolled >= scrolled) {
                     // scroll up
 
-                    if (scrolled <= minTop) {
+                    if (scrolled <= min_top) {
 
                         state = 'normal';
 
@@ -205,7 +205,7 @@ if (typeof Object.create !== 'function') {
                 } else {
                     // scroll down
 
-                    if (scrolled > minTop) {
+                    if (scrolled > min_top) {
 
                         state = 'visible';
 
@@ -220,13 +220,14 @@ if (typeof Object.create !== 'function') {
 
                     $parent.css('padding-bottom', 0);
                     navbar.$element.css('position', 'static');
+                    last_top = 0;
 
                 } else {
 
                     var top = 0;
 
                     if (state === 'visible') {
-                        var scroll_offset = (last_scrolled - scrolled) * navbar.options.factor;
+                        var scroll_offset = (Math.max(last_scrolled, min_top) - scrolled) * navbar.options.factor;
 
                         top = last_top + scroll_offset;
 
@@ -244,11 +245,7 @@ if (typeof Object.create !== 'function') {
                     }
 
                     $parent.css('padding-bottom', height);
-                    navbar.$element.css({
-                        'top': top,
-                        'position': 'fixed'
-                    });
-
+                    navbar.$element.css({ 'top': top, 'position': 'fixed' });
                 }
 
                 last_scrolled = scrolled;
