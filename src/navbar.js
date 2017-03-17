@@ -226,8 +226,7 @@ if (typeof Object.create !== 'function') {
                     var top = 0;
 
                     if (state === 'visible') {
-                        var factor = 0.5;
-                        var scroll_offset = (last_scrolled - scrolled) * factor;
+                        var scroll_offset = (last_scrolled - scrolled) * navbar.options.factor;
 
                         top = last_top + scroll_offset;
 
@@ -268,6 +267,7 @@ if (typeof Object.create !== 'function') {
     };
 
     $.fn.topnavbar.defaults = {
+        factor: 1,
         speed: 1000,
         hoverClass: 'hover',
         activeClass: 'active'

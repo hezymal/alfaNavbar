@@ -1,27 +1,62 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-      <title>
-        Sliders
-      </title>
-      <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-        <link href="../dist/navbar.css" rel="stylesheet">
-          <style type="text/css">
-            body {
-                margin: 0;
-                color: white;
-            }
-            
-            .block {
-                text-align: center;
-                line-height: 400px;
-                height: 400px;
-            }
-          </style>
-        </link>
-      </meta>
-    </meta>
+    <meta charset="utf-8"/>
+    <title>
+      Sliders
+    </title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <link href="../dist/navbar.css" rel="stylesheet"/>
+    <style type="text/css">
+      body {
+        margin: 0;
+        color: white;
+      }
+      
+      .block {
+        text-align: center;
+        line-height: 400px;
+        height: 400px;
+      }
+
+      .topnavbar {
+        background: #48f;
+        padding: 10px
+      }
+
+      .topnavbar ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .topnavbar ul:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      .topnavbar li {
+        float: left;
+      }
+
+      .topnavbar a {
+        display: block;
+        margin: 5px;
+        padding: 10px 30px;
+        color: #333;
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid white;
+      }
+
+      .topnavbar .active,
+      .topnavbar .hover {
+        background: #333;
+        border-color: rgba(255, 0, 0, 0.5);
+        color: #eee;
+      }
+    </style>
   </head>
   <body>
     <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
@@ -145,7 +180,7 @@
     </script>
     <script type="text/javascript">
       $('.dotnavbar').dotnavbar();
-      $('.topnavbar').topnavbar();
+      $('.topnavbar').topnavbar({ speed: 1 });
     </script>
   </body>
 </html>
