@@ -51,8 +51,8 @@
 }
 
 .dotnavbar .hover:before {
-  -webkit-transform: scale(1.6, 1.6);
-  transform: scale(1.6, 1.6);
+  -webkit-transform: scale(1.6);
+  transform: scale(1.6);
   background-color: #08f;
 }
 
@@ -64,48 +64,4 @@
   filter: none;
   margin: 0;
   visibility: visible;
-}
-
-.topnavbar {
-  padding: 10px;
-  background-color: rgba(255,0,0,0.5);
-}
-
-.topnavbar ul {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  zoom: 1;
-  list-style: none;
-}
-
-.topnavbar ul:before,
-.topnavbar ul:after {
-  content: "";
-  display: table;
-}
-
-.topnavbar ul:after {
-  clear: both;
-}
-
-.topnavbar li {
-  float: left;
-}
-
-.topnavbar a {
-  display: block;
-  margin: 5px;
-  padding: 10px 30px;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 10px;
-  border: 1px solid #fff;
-}
-
-.topnavbar .hover,
-.topnavbar .active {
-  background-color: #333;
-  border-color: rgba(255,0,0,0.5);
 }

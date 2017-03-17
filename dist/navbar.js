@@ -8,7 +8,7 @@ if (typeof Object.create !== 'function') {
 
 (function($, window, document) {
     "use strict";
- 
+
     var NavBar = {
         init: function(options, element) {
             this.options = $.extend({}, $.fn.navbar.defaults, options);
@@ -28,7 +28,7 @@ if (typeof Object.create !== 'function') {
 
             this.options.init && this.options.init(this);
             this.options.reset && this.options.reset(this);
-        }, 
+        },
 
         onWindowResize: function() {
             var scrolled = this.getScrolled();
