@@ -6,6 +6,8 @@ const csso = require('gulp-csso'); // Минификация CSS
 const uglify = require('gulp-uglify'); // Минификация JS
 const concat = require('gulp-concat'); // Склейка файлов
 const del = require('del');
+const fs = require('fs');
+const package = require('./package.json');
 
 const config = {
     clean: {
@@ -28,6 +30,19 @@ const config = {
 gulp.task('clean', () =>
     del(config.clean.selector, { force: true, dryRun: true })
 );
+
+gulp.task('iterate', () => {
+    const space         = '  ';
+    const separator     = '.';
+    const parts         = package.version.split(separator);
+    const build_index   = parts.length - 1;
+    const build_value   = parseInt(parts[build_index]);
+
+    parts[build_index]  = (build_value + 1).toString();
+    package.version     = parts.join(separator);
+
+    fs.writeFile("package.json", JSON.stringify(package, null, space));
+});
 
 gulp.task('js', () => {
     gulp.src(config.js.source)
@@ -64,5 +79,5 @@ gulp.task('watch', ['js', 'stylus'], () => {
     gulp.watch(config.stylus.source, ['stylus']);
 });
 
-gulp.task('build', ['clean', 'js', 'js-min', 'stylus', 'stylus-min']);
+gulp.task('build', ['clean', 'iterate', 'js', 'js-min', 'stylus', 'stylus-min']);
 gulp.task('default', ['clean', 'watch']);
