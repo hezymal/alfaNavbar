@@ -21,7 +21,8 @@
 
       .topnavbar {
         background: #48f;
-        padding: 10px
+        padding: 10px;
+        width: 100%;
       }
 
       .topnavbar ul {
@@ -181,6 +182,24 @@
     <script type="text/javascript">
       $('.dotnavbar').dotnavbar();
       $('.topnavbar').topnavbar({ speed: 1 });
+      $(window).keydown(function(event) {
+
+        var speed = 0;
+        var scrolled = $(document).scrollTop();
+
+        if (event.keyCode === 87) { // W
+          speed = -1;
+        }
+        
+        if (event.keyCode === 83) { // S
+          speed = +1;
+        }
+
+        scrolled += speed;
+
+        $(document).scrollTop(scrolled);
+        
+      });
     </script>
   </body>
 </html>

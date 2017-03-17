@@ -34,7 +34,7 @@ if (typeof Object.create !== 'function') {
             var scrolled = this.getScrolled();
 
             this.options.reset && this.options.reset(this);
-            this.options.fixed && this.options.fixed(this, scrolled);
+            //this.options.fixed && this.options.fixed(this, scrolled);
         },
 
         onWindowScroll: function() {
@@ -56,8 +56,6 @@ if (typeof Object.create !== 'function') {
         onLinkClick: function(event) {
             var $anchor = $(event.currentTarget.hash);
             var top = $anchor.offset().top;
-
-            event.preventDefault();
 
             this.$htmlbody.stop().animate(
                 { scrollTop: top + 1 },
@@ -173,16 +171,26 @@ if (typeof Object.create !== 'function') {
 
 
     var TopNavBar = function() {
-        var $parent, minTop, height;
+        var $wrapper, min_top, height;
         var last_scrolled = 0, last_top = 0;
+
+        function setStaticPosition($element) {
+            $wrapper.css('padding-bottom', 0);
+            $element.css('position', 'static');
+        }
+
+        function setFixedPosition($element, top) {
+            $wrapper.css('padding-bottom', height);
+            $element.css({ 'top': top, 'position': 'fixed' });
+        }
 
         return {
             init: function(navbar) {
-                $parent = navbar.$element.parent();
+                $wrapper = navbar.$element.wrap('<div></div>').parent();
             },
 
             reset: function(navbar) {
-                minTop = navbar.$element.offset().top;
+                min_top = $wrapper.offset().top;
                 height = navbar.$element.outerHeight();
             },
 
@@ -192,7 +200,7 @@ if (typeof Object.create !== 'function') {
                 if (last_scrolled >= scrolled) {
                     // scroll up
 
-                    if (scrolled <= minTop) {
+                    if (scrolled <= min_top) {
 
                         state = 'normal';
 
@@ -205,7 +213,7 @@ if (typeof Object.create !== 'function') {
                 } else {
                     // scroll down
 
-                    if (scrolled > minTop) {
+                    if (scrolled > min_top) {
 
                         state = 'visible';
 
@@ -218,8 +226,8 @@ if (typeof Object.create !== 'function') {
 
                 if (state === 'normal') {
 
-                    $parent.css('padding-bottom', 0);
-                    navbar.$element.css('position', 'static');
+                    setStaticPosition(navbar.$element);
+                    last_top = 0;
 
                 } else {
 
@@ -243,15 +251,10 @@ if (typeof Object.create !== 'function') {
                         last_top = top;
                     }
 
-                    $parent.css('padding-bottom', height);
-                    navbar.$element.css({
-                        'top': top,
-                        'position': 'fixed'
-                    });
-
+                    setFixedPosition(navbar.$element, top);
                 }
 
-                last_scrolled = scrolled;
+                last_scrolled = Math.max(scrolled, min_top);
             }
         };
     };
