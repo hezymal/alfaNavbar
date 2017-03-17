@@ -205,7 +205,7 @@ if (typeof Object.create !== 'function') {
                 } else {
                     // scroll down
 
-                    if (scrolled > minTop) { 
+                    if (scrolled > minTop) {
 
                         state = 'visible';
 
