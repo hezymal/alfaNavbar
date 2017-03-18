@@ -34,7 +34,7 @@ if (typeof Object.create !== 'function') {
             var scrolled = this.getScrolled();
 
             this.options.reset && this.options.reset(this);
-            this.options.fixed && this.options.fixed(this, scrolled);
+            //this.options.fixed && this.options.fixed(this, scrolled);
         },
 
         onWindowScroll: function() {
@@ -56,8 +56,6 @@ if (typeof Object.create !== 'function') {
         onLinkClick: function(event) {
             var $anchor = $(event.currentTarget.hash);
             var top = $anchor.offset().top;
-
-            event.preventDefault();
 
             this.$htmlbody.stop().animate(
                 { scrollTop: top + 1 },
@@ -124,10 +122,10 @@ if (typeof Object.create !== 'function') {
             },
 
             reset: function(navbar) {
-                screenHeight = navbar.$window.height();
-                elementHeight = navbar.$element.height();
-                minTop = $parent.offset().top;
-                maxTop = minTop + $parent.outerHeight() - elementHeight;
+                screenHeight    = navbar.$window.height();
+                elementHeight   = navbar.$element.height();
+                minTop          = $parent.offset().top;
+                maxTop          = minTop + $parent.outerHeight() - elementHeight;
             },
 
             fixed: function(navbar, scrolled) {
@@ -137,18 +135,18 @@ if (typeof Object.create !== 'function') {
                     if (scrolled + center > maxTop) {
                         navbar.$element.css({
                             'position': 'absolute',
-                            'top': maxTop + 'px'
+                            'top': maxTop
                         });
                     } else {
                         navbar.$element.css({
                             'position': 'fixed',
-                            'top': center + 'px'
+                            'top': center
                         });
                     }
                 } else {
                     navbar.$element.css({
                         'position': 'absolute',
-                        'top': minTop + 'px'
+                        'top': minTop
                     });
                 }
             }
@@ -173,16 +171,26 @@ if (typeof Object.create !== 'function') {
 
 
     var TopNavBar = function() {
-        var $parent, min_top, height;
+        var $wrapper, min_top, height;
         var last_scrolled = 0, last_top = 0;
+
+        function setStaticPosition($element) {
+            $wrapper.css('padding-bottom', 0);
+            $element.css('position', 'static');
+        }
+
+        function setFixedPosition($element, top) {
+            $wrapper.css('padding-bottom', height);
+            $element.css({ 'top': top, 'position': 'fixed' });
+        }
 
         return {
             init: function(navbar) {
-                $parent = navbar.$element.parent();
+                $wrapper = navbar.$element.wrap('<div></div>').parent();
             },
 
             reset: function(navbar) {
-                min_top = navbar.$element.offset().top;
+                min_top = $wrapper.offset().top;
                 height = navbar.$element.outerHeight();
             },
 
@@ -217,17 +225,16 @@ if (typeof Object.create !== 'function') {
                 }
 
                 if (state === 'normal') {
-
-                    $parent.css('padding-bottom', 0);
-                    navbar.$element.css('position', 'static');
+                    
                     last_top = 0;
+                    setStaticPosition(navbar.$element);
 
                 } else {
 
                     var top = 0;
 
                     if (state === 'visible') {
-                        var scroll_offset = (Math.max(last_scrolled, min_top) - scrolled) * navbar.options.factor;
+                        var scroll_offset = (last_scrolled - scrolled) * navbar.options.factor;
 
                         top = last_top + scroll_offset;
 
@@ -244,11 +251,10 @@ if (typeof Object.create !== 'function') {
                         last_top = top;
                     }
 
-                    $parent.css('padding-bottom', height);
-                    navbar.$element.css({ 'top': top, 'position': 'fixed' });
+                    setFixedPosition(navbar.$element, top);
                 }
 
-                last_scrolled = scrolled;
+                last_scrolled = Math.max(scrolled, min_top);
             }
         };
     };
