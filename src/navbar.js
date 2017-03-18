@@ -122,10 +122,10 @@ if (typeof Object.create !== 'function') {
             },
 
             reset: function(navbar) {
-                screenHeight = navbar.$window.height();
-                elementHeight = navbar.$element.height();
-                minTop = $parent.offset().top;
-                maxTop = minTop + $parent.outerHeight() - elementHeight;
+                screenHeight    = navbar.$window.height();
+                elementHeight   = navbar.$element.height();
+                minTop          = $parent.offset().top;
+                maxTop          = minTop + $parent.outerHeight() - elementHeight;
             },
 
             fixed: function(navbar, scrolled) {
@@ -135,18 +135,18 @@ if (typeof Object.create !== 'function') {
                     if (scrolled + center > maxTop) {
                         navbar.$element.css({
                             'position': 'absolute',
-                            'top': maxTop + 'px'
+                            'top': maxTop
                         });
                     } else {
                         navbar.$element.css({
                             'position': 'fixed',
-                            'top': center + 'px'
+                            'top': center
                         });
                     }
                 } else {
                     navbar.$element.css({
                         'position': 'absolute',
-                        'top': minTop + 'px'
+                        'top': minTop
                     });
                 }
             }
@@ -225,15 +225,16 @@ if (typeof Object.create !== 'function') {
                 }
 
                 if (state === 'normal') {
-                    setStaticPosition(navbar.$element);
+                    
                     last_top = 0;
+                    setStaticPosition(navbar.$element);
 
                 } else {
 
                     var top = 0;
 
                     if (state === 'visible') {
-                        var scroll_offset = (Math.max(last_scrolled, min_top) - scrolled) * navbar.options.factor;
+                        var scroll_offset = (last_scrolled - scrolled) * navbar.options.factor;
 
                         top = last_top + scroll_offset;
 
