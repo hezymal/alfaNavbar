@@ -225,7 +225,6 @@ if (typeof Object.create !== 'function') {
                 }
 
                 if (state === 'normal') {
-
                     setStaticPosition(navbar.$element);
                     last_top = 0;
 
@@ -234,7 +233,7 @@ if (typeof Object.create !== 'function') {
                     var top = 0;
 
                     if (state === 'visible') {
-                        var scroll_offset = (last_scrolled - scrolled) * navbar.options.factor;
+                        var scroll_offset = (Math.max(last_scrolled, min_top) - scrolled) * navbar.options.factor;
 
                         top = last_top + scroll_offset;
 
