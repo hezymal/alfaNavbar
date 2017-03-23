@@ -22,7 +22,7 @@
 
         // private functions
 
-        function getActiveLinkId(scrolled) {
+        function getActiveLink(scrolled) {
             var link = null;
 
             for (var i = 0; i < $links.length; i++) {
@@ -30,7 +30,7 @@
 
                 if ($anchor.length) {
                     if (scrolled >= $anchor.offset().top) {
-                        link = $links[i].hash;
+                        link = $links[i];
                     }
                 }
             }
@@ -39,7 +39,7 @@
                 var numberOfLinks = $links.length;
                 
                 if (numberOfLinks > 0) {
-                    link = $links[numberOfLinks - 1].hash;
+                    link = $links[numberOfLinks - 1];
                 }
             }
 
@@ -48,11 +48,11 @@
 
         function setActiveLink() {
             var scrolled = $that.getScrolled();
-            var activeLinkId = getActiveLinkId(scrolled);
+            var activeLink = getActiveLink(scrolled);
 
-            if (activeLinkId) {
+            if (activeLink) {
                 $links.removeClass(options.activeClass);
-                $(activeLinkId).addClass(options.activeClass);
+                $(activeLink).addClass(options.activeClass);
             }
         }
 
