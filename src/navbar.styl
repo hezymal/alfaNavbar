@@ -25,6 +25,16 @@
             background-color: #666
             border-radius: 50%
             transition: transform 1s
+            
+        &:hover:before
+            transform: scale(1.6)
+            background-color: #08f
+            
+        &:hover span
+            right: 34px
+            opacity: 1.0
+            margin: 0
+            visibility: visible
 
     span
         position: absolute
@@ -39,13 +49,3 @@
     .active
         &:before
             background-color: #F66
-        
-    .hover
-        &:before
-            transform: scale(1.6)
-            background-color: #08f
-        span
-            right: 34px
-            opacity: 1.0
-            margin: 0
-            visibility: visible

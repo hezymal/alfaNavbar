@@ -32,6 +32,22 @@
   transition: transform 1s;
 }
 
+.dotnavbar a:hover:before {
+  -webkit-transform: scale(1.6);
+  transform: scale(1.6);
+  background-color: #08f;
+}
+
+.dotnavbar a:hover span {
+  right: 34px;
+  opacity: 1;
+  -ms-filter: none;
+  -webkit-filter: none;
+  filter: none;
+  margin: 0;
+  visibility: visible;
+}
+
 .dotnavbar span {
   position: absolute;
   right: 34px;
@@ -48,20 +64,4 @@
 
 .dotnavbar .active:before {
   background-color: #f66;
-}
-
-.dotnavbar .hover:before {
-  -webkit-transform: scale(1.6);
-  transform: scale(1.6);
-  background-color: #08f;
-}
-
-.dotnavbar .hover span {
-  right: 34px;
-  opacity: 1;
-  -ms-filter: none;
-  -webkit-filter: none;
-  filter: none;
-  margin: 0;
-  visibility: visible;
 }

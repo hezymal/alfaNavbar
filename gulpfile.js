@@ -60,6 +60,7 @@ gulp.task('js-min', () => {
 gulp.task('stylus', () => {
     gulp.src(config.stylus.source)
         .pipe(stylus({ use: nib() }))
+        .on('error', console.error.bind(console))
         .pipe(myth())
         .pipe(concat(config.stylus.devName))
         .pipe(gulp.dest(config.stylus.build))
