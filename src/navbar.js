@@ -66,7 +66,7 @@
         }
 
         function onLinkClick(event) {
-            $anchor = $(event.currentTarget.hash);
+            var $anchor = $(event.currentTarget.hash);
 
             if ($anchor.length) {
                 event.preventDefault();
