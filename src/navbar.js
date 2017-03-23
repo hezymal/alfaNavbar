@@ -23,21 +23,18 @@
         function getActiveLink(scrolled) {
             var link = null;
 
-            for (var i = 0; i < $links.length; i++) {
-                var $anchor = $($links[i].hash);
+            if ($links.length)
+            {
+                link = $links[0];
 
-                if ($anchor.length) {
-                    if (scrolled >= $anchor.offset().top) {
-                        link = $links[i];
+                for (var i = 1; i < $links.length; i++) {
+                    var $anchor = $($links[i].hash);
+
+                    if ($anchor.length) {
+                        if (scrolled >= $anchor.offset().top) {
+                            link = $links[i];
+                        }
                     }
-                }
-            }
-            
-            if (scrolled == $document.height() - $window.height()) {
-                var numberOfLinks = $links.length;
-                
-                if (numberOfLinks > 0) {
-                    link = $links[numberOfLinks - 1];
                 }
             }
 
