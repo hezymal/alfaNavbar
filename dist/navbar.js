@@ -66,9 +66,13 @@
         }
 
         function onLinkClick(event) {
-            event.preventDefault();
+            $anchor = $(event.currentTarget.hash);
 
-            $that.scrollTo($(event.currentTarget.hash));
+            if ($anchor.length) {
+                event.preventDefault();
+
+                $that.scrollTo($anchor);
+            }
         }
 
 
