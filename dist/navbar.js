@@ -2,11 +2,6 @@
     "use strict";
 
 
-    var $window = $(window);
-    var $document = $(document);
-    var $htmlbody = $('html, body');
-
-
     $.fn.navbar = function(options) {
         
         // check arguments
@@ -16,6 +11,9 @@
 
         // private fields
         
+        var $window = $(window);
+        var $document = $(document);
+        var $htmlbody = $('html, body');
         var $that   = this;
         var $links  = $that.find('a');
 
@@ -81,7 +79,7 @@
         $that.scrollTo = function($anchor) {
             var top = $anchor.offset().top;
 
-            $htmlbody.stop().animate(
+            $('html, body').stop().animate(
                 { scrollTop: top + 1 },
                 { duration: options.speed }
             );
@@ -126,6 +124,7 @@
 
         // private fields
 
+        var $window = $(window);
         var $navbar = $(this).navbar(options);
         var $parent = $navbar.parent();
         var screenHeight;
@@ -185,6 +184,7 @@
 
         // private fields
 
+        var $window         = $(window);
         var lastScrolled    = 0;
         var lastTop         = 0;
         var minTop;
