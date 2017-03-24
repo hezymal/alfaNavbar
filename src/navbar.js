@@ -3,6 +3,7 @@
 
 
     $.fn.navbar = function(options) {
+
         
         // check arguments
 
@@ -17,8 +18,20 @@
         var $that   = this;
         var $links  = $that.find('a');
 
-
+        
         // private functions
+
+        function getAnchorTop($anchor, forScroll) {
+            var threshold = options.threshold;
+
+            forScroll = forScroll || 0;
+
+            if (threshold === 'center') {
+                threshold = (forScroll * $anchor.height() - $window.height()) / 2;
+            }
+
+            return $anchor.offset().top + threshold;
+        }
 
         function getActiveLink(scrolled) {
             var link = null;
@@ -31,7 +44,7 @@
                     var $anchor = $($links[i].hash);
 
                     if ($anchor.length) {
-                        if (scrolled >= $anchor.offset().top) {
+                        if (scrolled >= getAnchorTop($anchor)) {
                             link = $links[i];
                         }
                     }
@@ -74,10 +87,10 @@
         // global functions
 
         $that.scrollTo = function($anchor) {
-            var top = $anchor.offset().top;
+            var top = getAnchorTop($anchor, true);
 
             $('html, body').stop().animate(
-                { scrollTop: top + 1 },
+                { scrollTop: top },
                 { duration: options.speed }
             );
         };
@@ -109,6 +122,7 @@
     $.fn.navbar.defaults = {
         speed: 1000,
         activeClass: 'active',
+        threshold: 0,
     };
 
 

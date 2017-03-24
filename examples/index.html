@@ -102,9 +102,9 @@
       <div class="dotnavbar">
         <ul>
           <li>
-            <a href="#one" id="asd">
+            <a href="#one">
               <span>
-                One
+                One time
               </span>
             </a>
           </li>
@@ -168,8 +168,8 @@
     <script src="../dist/navbar.js">
     </script>
     <script type="text/javascript">
-      $('.dotnavbar').dotnavbar();
-      $('.topnavbar').topnavbar();
+      $('.dotnavbar').dotnavbar({ threshold: 'center' });
+      $('.topnavbar').topnavbar({ threshold: 'center' });
       $(window).keydown(function(event) {
 
         var speed = 0;
