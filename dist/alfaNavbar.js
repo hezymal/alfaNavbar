@@ -202,7 +202,10 @@
 
         var $navbar         = $(this).alfaNavbar(options);
         var $wrapper        = $navbar.wrap('<div></div>').parent();
-        $wrapper.css('position', $navbar.css('position'));
+        $wrapper.css({
+            position: $navbar.css('position'),
+            width: $navbar.css('width'),
+        });
 
 
         // subscribe
