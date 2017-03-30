@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+
+
     <meta charset="utf-8"/>
-    <title>
-      Sliders
-    </title>
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <link href="../dist/navbar.css" rel="stylesheet"/>
+    <title>AlfaNavbar</title>
+
+
+    <link href="../dist/alfaNavbar.css" rel="stylesheet"/>
     <style type="text/css">
       body {
         margin: 0;
@@ -19,29 +21,30 @@
         height: 400px;
       }
 
-      .topnavbar {
+      .alfaTopNavbar {
+        box-sizing: border-box;
         background: #48f;
         padding: 10px;
         width: 100%;
       }
 
-      .topnavbar ul {
+      .alfaTopNavbar ul {
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
-      .topnavbar ul:after {
+      .alfaTopNavbar ul:after {
         content: "";
         display: table;
         clear: both;
       }
 
-      .topnavbar li {
+      .alfaTopNavbar li {
         float: left;
       }
 
-      .topnavbar a {
+      .alfaTopNavbar a {
         display: block;
         margin: 5px;
         padding: 10px 30px;
@@ -51,143 +54,71 @@
         border: 1px solid white;
       }
 
-      .topnavbar .active,
-      .topnavbar .hover {
+      .alfaTopNavbar .active,
+      .alfaTopNavbar .hover {
         background: #333;
         border-color: rgba(255, 0, 0, 0.5);
         color: #eee;
       }
     </style>
+
+
   </head>
   <body>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
-    <div class="topnavbar">
+
+
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
+    <div class="alfaTopNavbar">
       <ul>
-        <li>
-          <a href="#one" id="asd">
-            One
-          </a>
-        </li>
-        <li>
-          <a href="#two">
-            Two
-          </a>
-        </li>
-        <li>
-          <a href="#three">
-            Three
-          </a>
-        </li>
-        <li>
-          <a href="#four">
-            Four
-          </a>
-        </li>
-        <li>
-          <a href="#five">
-            Five
-          </a>
-        </li>
+        <li><a href="#one">One</a></li>
+        <li><a href="#two">Two</a></li>
+        <li><a href="#three">Three</a></li>
+        <li><a href="#four">Four</a></li>
+        <li><a href="#five">Five</a></li>
       </ul>
     </div>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
     <div>
-      <div class="dotnavbar">
+      <div class="balfaDotNavbar">
         <ul>
-          <li>
-            <a href="#one">
-              <span>
-                One time
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#two">
-              <span>
-                Two
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#three">
-              <span>
-                Three
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#four">
-              <span>
-                Four
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#five">
-              <span>
-                Five
-              </span>
-            </a>
-          </li>
+          <li><a href="#one"  ><span>One time</span></a></li>
+          <li><a href="#two"  ><span>Two</span></a></li>
+          <li><a href="#three"><span>Three</span></a></li>
+          <li><a href="#four" ><span>Four</span></a></li>
+          <li><a href="#five" ><span>Five</span></a></li>
         </ul>
       </div>
-      <div class="block" id="one" style="background-color: rgba(255, 128, 0, 0.5)">
-        # 1
-      </div>
-      <div class="block" id="two" style="background-color: rgba(255, 0, 128, 0.5)">
-        # 2
-      </div>
-      <div class="block" id="three" style="background-color: rgba(128, 0, 128, 0.5)">
-        # 3
-      </div>
-      <div class="block" id="four" style="background-color: rgba(128, 0, 255, 0.5)">
-        # 4
-      </div>
-      <div class="block" id="five" style="background-color: rgba(255, 128, 0, 0.5)">
-        # 5
-      </div>
+      <div class="block" id="one"   style="background-color: rgba(255, 128, 0, 0.5)"># 1</div>
+      <div class="block" id="two"   style="background-color: rgba(255, 0, 128, 0.5)"># 2</div>
+      <div class="block" id="three" style="background-color: rgba(128, 0, 128, 0.5)"># 3</div>
+      <div class="block" id="four"  style="background-color: rgba(128, 0, 255, 0.5)"># 4</div>
+      <div class="block" id="five"  style="background-color: rgba(255, 128, 0, 0.5)"># 5</div>
     </div>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
-    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)">
-      # OUT
-    </div>
-    <script src="../node_modules/jquery/dist/jquery.js">
-    </script>
-    <script src="../dist/navbar.js">
-    </script>
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
+    <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
+
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../dist/alfaNavbar.js"></script>
     <script type="text/javascript">
-      $('.dotnavbar').dotnavbar({ threshold: 'center' });
-      $('.topnavbar').topnavbar({ threshold: 'center' });
+      
+      $('.balfaDotNavbar').alfaDotNavbar({ threshold: 'center' });
+      $('.alfaTopNavbar').alfaTopNavbar({ threshold: 'center' });
+
       $(window).keydown(function(event) {
 
-        var speed = 0;
-        var scrolled = $(document).scrollTop();
-
-        if (event.keyCode === 87) { // W
-          speed = -1;
-        }
-        
-        if (event.keyCode === 83) { // S
-          speed = +1;
-        }
-
-        scrolled += speed;
+        var up       = (event.keyCode === 87) * 1 || 0;
+        var down     = (event.keyCode === 83) * 1 || 0;
+        var scrolled = $(document).scrollTop() -up +down;
 
         $(document).scrollTop(scrolled);
         
       });
+
     </script>
+
+
   </body>
 </html>

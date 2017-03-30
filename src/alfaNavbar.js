@@ -1,13 +1,15 @@
+/*eslint-env browser*/
+
 (function($, window, document) {
     "use strict";
 
 
-    $.fn.navbar = function(options) {
+    $.fn.alfaNavbar = function(options) {
 
         
         // check arguments
 
-        options     = $.extend({}, $.fn.navbar.defaults, options);
+        options     = $.extend({}, $.fn.alfaNavbar.defaults, options);
 
 
         // private fields
@@ -17,7 +19,6 @@
         var $htmlbody = $('html, body');
         var $that   = this;
         var $links  = $that.find('a');
-
         
         // private functions
 
@@ -89,7 +90,7 @@
         $that.scrollTo = function($anchor) {
             var top = getAnchorTop($anchor, true);
 
-            $('html, body').stop().animate(
+            $htmlbody.stop().animate(
                 { scrollTop: top },
                 { duration: options.speed }
             );
@@ -119,24 +120,24 @@
     };
 
 
-    $.fn.navbar.defaults = {
+    $.fn.alfaNavbar.defaults = {
         speed: 1000,
         activeClass: 'active',
         threshold: 0,
     };
 
 
-    $.fn.dotnavbar = function(options) {
+    $.fn.alfaDotNavbar = function(options) {
 
         // check arguments
 
-        options = $.extend({}, $.fn.navbar.defaults, options);
+        options = $.extend({}, $.fn.alfaNavbar.defaults, options);
 
 
         // private fields
 
         var $window = $(window);
-        var $navbar = $(this).navbar(options);
+        var $navbar = $(this).alfaNavbar(options);
         var $parent = $navbar.parent();
         var screenHeight;
         var height;
@@ -186,22 +187,20 @@
     };
 
 
-    $.fn.topnavbar = function(options) {
+    $.fn.alfaTopNavbar = function(options) {
 
         // check arguments
 
-        options = $.extend({}, $.fn.navbar.defaults, $.fn.topnavbar.defaults, options);
+        options = $.extend({}, $.fn.alfaNavbar.defaults, $.fn.alfaTopNavbar.defaults, options);
 
 
         // private fields
-
-        var $window         = $(window);
         var lastScrolled    = 0;
         var lastTop         = 0;
         var minTop;
         var height;
 
-        var $navbar         = $(this).navbar(options);
+        var $navbar         = $(this).alfaNavbar(options);
         var $wrapper        = $navbar.wrap('<div></div>').parent();
         $wrapper.css('position', $navbar.css('position'));
 
@@ -247,8 +246,8 @@
         return $navbar;
     };
 
-    $.fn.topnavbar.defaults = {
+    $.fn.alfaTopNavbar.defaults = {
         factor: 1,
     };
 
-})(jQuery, window, document);
+})(window.jQuery, window, document);

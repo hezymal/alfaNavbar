@@ -1,84 +1,107 @@
+/*eslint-env node*/
+
+// for build
 const gulp = require('gulp');
-const stylus = require('gulp-stylus');
-const nib = require('nib');
-const myth = require('gulp-myth'); // Плагин для префиксов CSS
-const csso = require('gulp-csso'); // Минификация CSS
-const uglify = require('gulp-uglify'); // Минификация JS
-const concat = require('gulp-concat'); // Склейка файлов
+const concat = require('gulp-concat');
 const del = require('del');
 const fs = require('fs');
-const package = require('./package.json');
+const config = require('./package.json');
 
-const config = {
+// for CSS
+const stylus = require('gulp-stylus');
+const nib = require('nib');
+const csso = require('gulp-csso');
+
+// for JS
+const uglify = require('gulp-uglify');
+
+
+
+// configuration
+const options = {
     clean: {
         selector: ['./dist/**', '!./dist']
     },
     js: {
         source: ['./src/**/*.js'],
         build: './dist/',
-        devName: 'navbar.js',
-        minName: 'navbar.min.js'
+        devName: config.name + '.js',
+        minName: config.name + '.min.js'
     },
     stylus: {
         source: ['./src/**/*.styl'],
         build: './dist/',
-        devName: 'navbar.css',
-        minName: 'navbar.min.css'
-    },
+        devName: config.name + '.css',
+        minName: config.name + '.min.css'
+    }
 };
 
+
+
 gulp.task('clean', () =>
-    del(config.clean.selector, { force: true, dryRun: true })
+    del(options.clean.selector, { force: true, dryRun: true })
 );
 
-gulp.task('iterate', () => {
+
+
+gulp.task('iterate', function() {
     const space         = '  ';
     const separator     = '.';
-    const parts         = package.version.split(separator);
+    const parts         = config.version.split(separator);
     const build_index   = parts.length - 1;
-    const build_value   = parseInt(parts[build_index]);
+    const build_value   = parseInt(parts[build_index]) + 1;
 
-    parts[build_index]  = (build_value + 1).toString();
-    package.version     = parts.join(separator);
+    parts[build_index]  = build_value.toString();
+    config.version     = parts.join(separator);
 
-    fs.writeFile("package.json", JSON.stringify(package, null, space));
+    fs.writeFile("package.json", JSON.stringify(config, null, space));
+}); 
+
+
+
+gulp.task('js', function() {
+    gulp.src(options.js.source)
+        .pipe(concat(options.js.devName))
+        .pipe(gulp.dest(options.js.build));
 });
 
-gulp.task('js', () => {
-    gulp.src(config.js.source)
-        .pipe(concat(config.js.devName))
-        .pipe(gulp.dest(config.js.build))
-});
 
-gulp.task('js-min', () => {
-    gulp.src(config.js.source)
+
+gulp.task('js-min', function() {
+    gulp.src(options.js.source)
         .pipe(uglify())
-        .pipe(concat(config.js.minName))
-        .pipe(gulp.dest(config.js.build))
+        .pipe(concat(options.js.minName))
+        .pipe(gulp.dest(options.js.build));
 });
 
-gulp.task('stylus', () => {
-    gulp.src(config.stylus.source)
+
+
+gulp.task('stylus', function() {
+    gulp.src(options.stylus.source)
         .pipe(stylus({ use: nib() }))
         .on('error', console.error.bind(console))
-        .pipe(myth())
-        .pipe(concat(config.stylus.devName))
-        .pipe(gulp.dest(config.stylus.build))
+        .pipe(concat(options.stylus.devName))
+        .pipe(gulp.dest(options.stylus.build));
 });
 
-gulp.task('stylus-min', () => {
-    gulp.src(config.stylus.source)
+
+
+gulp.task('stylus-min', function() {
+    gulp.src(options.stylus.source)
         .pipe(stylus({ use: nib() }))
-        .pipe(myth())
         .pipe(csso())
-        .pipe(concat(config.stylus.minName))
-        .pipe(gulp.dest(config.stylus.build))
+        .pipe(concat(options.stylus.minName))
+        .pipe(gulp.dest(options.stylus.build));
 });
 
-gulp.task('watch', ['js', 'stylus'], () => {
-    gulp.watch(config.js.source, ['js']);
-    gulp.watch(config.stylus.source, ['stylus']);
+
+
+gulp.task('watch', ['js', 'stylus'], function() {
+    gulp.watch(options.js.source, ['js']);
+    gulp.watch(options.stylus.source, ['stylus']);
 });
+
+
 
 gulp.task('build', ['clean', 'iterate', 'js', 'js-min', 'stylus', 'stylus-min']);
 gulp.task('default', ['clean', 'watch']);

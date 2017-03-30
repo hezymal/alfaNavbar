@@ -1,17 +1,15 @@
-.dotnavbar {
+.alfaDotNavbar {
   position: absolute;
   right: 10px;
 }
-
-.dotnavbar ul {
+.alfaDotNavbar ul {
   margin: 0;
   padding: 0;
   border: 0;
   outline: 0;
   list-style: none;
 }
-
-.dotnavbar a {
+.alfaDotNavbar a {
   position: relative;
   display: block;
   width: 10px;
@@ -20,8 +18,7 @@
   color: #333;
   text-decoration: none;
 }
-
-.dotnavbar a:before {
+.alfaDotNavbar a:before {
   content: "";
   position: absolute;
   display: inline-block;
@@ -30,21 +27,24 @@
   background-color: #666;
   border-radius: 50%;
   -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  -ms-transition: -ms-transform 1s;
   transition: transform 1s;
 }
-
-.dotnavbar a:hover:before {
+.alfaDotNavbar a:hover:before {
   -webkit-transform: scale(1.6);
+  -moz-transform: scale(1.6);
+  -o-transform: scale(1.6);
+  -ms-transform: scale(1.6);
   transform: scale(1.6);
   background-color: #08f;
 }
-
-.dotnavbar a:hover span {
+.alfaDotNavbar a:hover span {
   margin: 0;
   visibility: visible;
 }
-
-.dotnavbar span {
+.alfaDotNavbar span {
   position: absolute;
   right: 30px;
   width: 300px;
@@ -52,14 +52,16 @@
   line-height: 10px;
   text-align: right;
   visibility: hidden;
-  /* for beautiful */
+/* for beautiful */
   bottom: 3px;
-  /* animation     */
+/* animation     */
   margin-right: 16px;
   -webkit-transition: margin 0.3s linear;
+  -moz-transition: margin 0.3s linear;
+  -o-transition: margin 0.3s linear;
+  -ms-transition: margin 0.3s linear;
   transition: margin 0.3s linear;
 }
-
-.dotnavbar .active:before {
+.alfaDotNavbar .active:before {
   background-color: #f66;
 }

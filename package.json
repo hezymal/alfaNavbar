@@ -1,8 +1,8 @@
 {
-  "name": "navbar",
-  "version": "1.0.12",
+  "name": "alfaNavbar",
+  "version": "1.0.31",
   "description": "",
-  "author": "",
+  "author": "alfapage.ru",
   "license": "Apache-2.0",
   "dependencies": {
     "jquery": "^3.1.1"
@@ -12,7 +12,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^2.0.0",
-    "gulp-myth": "^1.1.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.1.0",
     "nib": "^1.1.2"
