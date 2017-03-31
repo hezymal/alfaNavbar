@@ -3,8 +3,6 @@
 // for build
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const del = require('del');
-const fs = require('fs');
 const config = require('./package.json');
 
 // for CSS
@@ -38,21 +36,20 @@ const options = {
 
 
 
-gulp.task('clean', () =>
+gulp.task('clean', () => {
+    const del = require('del');
+    
     del(options.clean.selector, { force: true, dryRun: true })
-);
+});
 
 
 
-gulp.task('iterate', function() {
-    const space         = '  ';
-    const separator     = '.';
-    const parts         = config.version.split(separator);
-    const build_index   = parts.length - 1;
-    const build_value   = parseInt(parts[build_index]) + 1;
+gulp.task('iterate', () => {
+    const fs = require('fs');
+    const semver = require('semver');
+    const space = '  ';
 
-    parts[build_index]  = build_value.toString();
-    config.version     = parts.join(separator);
+    config.version = semver.inc(config.version, 'patch');
 
     fs.writeFile("package.json", JSON.stringify(config, null, space));
 }); 
