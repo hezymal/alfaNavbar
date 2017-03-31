@@ -53,45 +53,46 @@ module.exports = class BaseNavbar {
 
     renderActiveLink() {
         
-        if (this.$links.length) {
+        if ( this.$links.length < 1 ) {
 
             return;
 
         }
 
-
         const scroll = this.scroll();
         let link = this.$links[0];
 
-        for (var i = 1, length = this.$links.length; i < length; i++) {
+        for ( var i = 1, length = this.$links.length; i < length; i++ ) {
 
-            const id = this.hashToId(this.$links[i].hash);
+            const selector = this.$links[i].hash;
 
-            if (id && scroll >= this.anchorScroll(id)) {
+            if ( $(selector).length ) {
 
-                link = this.$links[i];
+                if ( scroll >= this.getAnchorScroll(selector) ) {
+
+                    link = this.$links[i];
+
+                }
 
             }
 
         }
 
-
-        $(link)
-            .addClass(this.options.activeClass)
-            .siblings()
-            .removeClass(this.options.activeClass);
+        // add `.active` class on link and remove others
+        this.$links.removeClass( this.options.activeClass );
+        $( link ).addClass( this.options.activeClass );
 
     }
 
 
-    scroll(selector) {
+    scroll( selector ) {
 
-        if (selector) {
+        if ( selector ) {
 
             $('html, body')
                 .stop()
                 .animate(
-                    { scrollTop: this.anchorScroll(selector, true) },
+                    { scrollTop: this.getAnchorScroll(selector, true) },
                     { duration: this.options.speed }
                 );
 
@@ -104,16 +105,7 @@ module.exports = class BaseNavbar {
     }
 
 
-    hashToId(hash) {
-        
-        const id = hash.slice(1);
-
-        return document.getElementById(id) ? id : null;
-
-    }
-
-
-    anchorScroll(selector, forScroll) {
+    getAnchorScroll(selector, forScroll) {
         
         const $anchor = $(selector);
         let threshold = this.options.threshold;
@@ -147,13 +139,13 @@ module.exports = class BaseNavbar {
 
     onLinkClick(event) {
 
-        const id = this.hashToId(event.currentTarget.hash);
+        const selector = event.currentTarget.hash;
 
-        if (id) {
+        if ( $( selector ).length ) {
 
             event.preventDefault();
 
-            this.scroll(id);
+            this.scroll( selector );
         }
 
     }

@@ -68,7 +68,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 key: "renderActiveLink",
                 value: function renderActiveLink() {
 
-                    if (this.$links.length) {
+                    if (this.$links.length < 1) {
 
                         return;
                     }
@@ -78,15 +78,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     for (var i = 1, length = this.$links.length; i < length; i++) {
 
-                        var id = this.hashToId(this.$links[i].hash);
+                        var selector = this.$links[i].hash;
 
-                        if (id && scroll >= this.anchorScroll(id)) {
+                        if ($(selector).length) {
 
-                            link = this.$links[i];
+                            if (scroll >= this.getAnchorScroll(selector)) {
+
+                                link = this.$links[i];
+                            }
                         }
                     }
 
-                    $(link).addClass(this.options.activeClass).siblings().removeClass(this.options.activeClass);
+                    // add `.active` class on link and remove others
+                    this.$links.removeClass(this.options.activeClass);
+                    $(link).addClass(this.options.activeClass);
                 }
             }, {
                 key: "scroll",
@@ -94,23 +99,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     if (selector) {
 
-                        $('html, body').stop().animate({ scrollTop: this.anchorScroll(selector, true) }, { duration: this.options.speed });
+                        $('html, body').stop().animate({ scrollTop: this.getAnchorScroll(selector, true) }, { duration: this.options.speed });
                     } else {
 
                         return $(document).scrollTop();
                     }
                 }
             }, {
-                key: "hashToId",
-                value: function hashToId(hash) {
-
-                    var id = hash.slice(1);
-
-                    return document.getElementById(id) ? id : null;
-                }
-            }, {
-                key: "anchorScroll",
-                value: function anchorScroll(selector, forScroll) {
+                key: "getAnchorScroll",
+                value: function getAnchorScroll(selector, forScroll) {
 
                     var $anchor = $(selector);
                     var threshold = this.options.threshold;
@@ -140,13 +137,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 key: "onLinkClick",
                 value: function onLinkClick(event) {
 
-                    var id = this.hashToId(event.currentTarget.hash);
+                    var selector = event.currentTarget.hash;
 
-                    if (id) {
+                    if ($(selector).length) {
 
                         event.preventDefault();
 
-                        this.scroll(id);
+                        this.scroll(selector);
                     }
                 }
             }]);
