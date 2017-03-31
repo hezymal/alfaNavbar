@@ -1,50 +1,52 @@
-/*eslint-env node*/
-
 // for build
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const config = require('./package.json');
 
-// for CSS
-const stylus = require('gulp-stylus');
-const nib = require('nib');
-const csso = require('gulp-csso');
-
-// for JS
-const uglify = require('gulp-uglify');
-
-
 
 // configuration
 const options = {
+
     clean: {
-        selector: ['./dist/**', '!./dist']
+
+        selector: ['./dist/**', '!./dist'],
+
     },
+
     js: {
-        source: ['./src/**/*.js'],
+
+        source: `./src/js/${config.name}.js`,
         build: './dist/',
         devName: config.name + '.js',
-        minName: config.name + '.min.js'
+        minName: config.name + '.min.js',
+
     },
+
     stylus: {
-        source: ['./src/**/*.styl'],
+
+        source: './src/stylus/**/*.styl',
         build: './dist/',
         devName: config.name + '.css',
-        minName: config.name + '.min.css'
+        minName: config.name + '.min.css',
+
     }
+
 };
 
 
 
 gulp.task('clean', () => {
+    
     const del = require('del');
     
     del(options.clean.selector, { force: true, dryRun: true })
+
 });
 
 
 
 gulp.task('iterate', () => {
+
     const fs = require('fs');
     const semver = require('semver');
     const space = '  ';
@@ -52,29 +54,60 @@ gulp.task('iterate', () => {
     config.version = semver.inc(config.version, 'patch');
 
     fs.writeFile("package.json", JSON.stringify(config, null, space));
+
 }); 
 
 
 
-gulp.task('js', function() {
-    gulp.src(options.js.source)
+gulp.task('js', () => {
+
+    const babel = require('gulp-babel');
+    const browserify = require('gulp-browserify');
+
+    return gulp
+        .src(options.js.source)
+        .pipe(browserify({
+            insertGlobals : false,
+        }))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(concat(options.js.devName))
         .pipe(gulp.dest(options.js.build));
+
 });
 
 
 
-gulp.task('js-min', function() {
-    gulp.src(options.js.source)
+gulp.task('js-min', () => {
+
+    const babel = require('gulp-babel');
+    const browserify = require('gulp-browserify');
+    const uglify = require('gulp-uglify');
+
+    return gulp
+        .src(options.js.source)
+        .pipe(browserify({
+            insertGlobals : false,
+        }))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .pipe(concat(options.js.minName))
         .pipe(gulp.dest(options.js.build));
+
 });
 
 
 
-gulp.task('stylus', function() {
-    gulp.src(options.stylus.source)
+gulp.task('stylus', () => {
+
+    const stylus = require('gulp-stylus');
+    const nib = require('nib');
+
+    return gulp
+        .src(options.stylus.source)
         .pipe(stylus({ use: nib() }))
         .on('error', console.error.bind(console))
         .pipe(concat(options.stylus.devName))
@@ -83,19 +116,28 @@ gulp.task('stylus', function() {
 
 
 
-gulp.task('stylus-min', function() {
-    gulp.src(options.stylus.source)
+gulp.task('stylus-min', () => {
+
+    const stylus = require('gulp-stylus');
+    const nib = require('nib');
+    const csso = require('gulp-csso');
+
+    return gulp
+        .src(options.stylus.source)
         .pipe(stylus({ use: nib() }))
         .pipe(csso())
         .pipe(concat(options.stylus.minName))
         .pipe(gulp.dest(options.stylus.build));
+
 });
 
 
 
-gulp.task('watch', ['js', 'stylus'], function() {
+gulp.task('watch', ['js', 'stylus'], () => {
+
     gulp.watch(options.js.source, ['js']);
     gulp.watch(options.stylus.source, ['stylus']);
+
 });
 
 
