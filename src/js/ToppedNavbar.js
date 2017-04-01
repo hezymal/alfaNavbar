@@ -17,12 +17,8 @@ module.exports = class ToppedNavbar extends BaseNavbar {
         this.height         = 0;
 
         this.$wrapper       = this.$element
-            .wrap('<div></div>')
-            .parent()
-            .css({
-                position    : this.$element.css('position'),
-                width       : this.$element.css('width'),
-            });
+            .wrap('<div style="width: 100%"></div>')
+            .parent();
 
     }
 

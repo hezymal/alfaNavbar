@@ -1,11 +1,15 @@
 # alfaNavbar
 
-Simple jQuery navigation bars: top and dotted
+Simple jQuery navigation bar
 
 
 ## Install
 
-npm install https://github.com/hezymal/alfaNavbar.git --save
+You can Install alfaNavbar using the [npm](http://npmjs.org)
+
+```sh
+$ npm install https://github.com/hezymal/alfaNavbar.git --save
+```
 
 
 ## Examples

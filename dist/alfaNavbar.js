@@ -234,10 +234,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this2.minTop = 0;
                 _this2.height = 0;
 
-                _this2.$wrapper = _this2.$element.wrap('<div></div>').parent().css({
-                    position: _this2.$element.css('position'),
-                    width: _this2.$element.css('width')
-                });
+                _this2.$wrapper = _this2.$element.wrap('<div style="width: 100%"></div>').parent();
 
                 return _this2;
             }
