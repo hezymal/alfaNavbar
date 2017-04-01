@@ -37,20 +37,30 @@ module.exports = class ToppedNavbar extends BaseNavbar {
         const scroll = this.scroll();
         let top = 0;
         
-        if (scroll > this.minTop) {
+        if ( scroll > this.minTop ) {
             
-            top = this.lastTop + (this.lastScrolled - scroll) * this.options.factor;
+            top = this.lastTop + ( this.lastScrolled - scroll ) * this.options.factor;
             top = (top < -this.height)  ? -this.height  : top;
             top = (top > 0)             ? 0             : top;
 
-            this.$element.addClass('fixed');
+            this.$element.addClass( this.options.fixedClass );
             this.$content.css('top', top);
 
         } else {
 
-            this.$element.removeClass('fixed');
+            this.$element.removeClass( this.options.fixedClass );
             this.$content.css('top', 0);
             
+        }
+
+        if ( scroll > this.minTop + this.height ) {
+
+            this.$element.addClass( this.options.outerClass );
+
+        } else { 
+
+            this.$element.removeClass( this.options.outerClass );
+
         }
 
         this.lastTop = top;

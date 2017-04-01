@@ -8,7 +8,6 @@
     <title>AlfaNavbar</title>
 
 
-    <link href="../dist/alfaNavbar.css" rel="stylesheet"/>
     <style type="text/css">
 
       body 
@@ -34,6 +33,11 @@
         .topped.fixed .topped-content
         {
           position: fixed;
+        }
+
+        .topped.outer .topped-content
+        {
+          background: #555;
         }
 
       .topped-content
@@ -181,15 +185,13 @@
     <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
     <div>
       <div class="dotted">
-        <div class="dotted-content">
-          <ul>
-            <li><a href="#one"  ><span>One time</span></a></li>
-            <li><a href="#two"  ><span>Two</span></a></li>
-            <li><a href="#three"><span>Three</span></a></li>
-            <li><a href="#four" ><span>Four</span></a></li>
-            <li><a href="#five" ><span>Five</span></a></li>
-          </ul>
-        </div>
+        <ul>
+          <li><a href="#one"  ><span>One time</span></a></li>
+          <li><a href="#two"  ><span>Two</span></a></li>
+          <li><a href="#three"><span>Three</span></a></li>
+          <li><a href="#four" ><span>Four</span></a></li>
+          <li><a href="#five" ><span>Five</span></a></li>
+        </ul>
       </div>
       <div class="block" id="one"   style="background-color: rgba(255, 128, 0, 0.5)"># 1</div>
       <div class="block" id="two"   style="background-color: rgba(255, 0, 128, 0.5)"># 2</div>

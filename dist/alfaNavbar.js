@@ -196,14 +196,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                         if (scroll + middle > this.maxTop) {
 
-                            this.$element.removeClass('fixed').css('top', this.maxTop);
+                            this.$element.removeClass(this.options.fixedClass).css('top', this.maxTop);
                         } else {
 
-                            this.$element.addClass('fixed').css('top', middle);
+                            this.$element.addClass(this.options.fixedClass).css('top', middle);
                         }
                     } else {
 
-                        this.$element.removeClass('fixed').css('top', this.minTop);
+                        this.$element.removeClass(this.options.fixedClass).css('top', this.minTop);
                     }
                 }
             }]);
@@ -256,12 +256,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         top = top < -this.height ? -this.height : top;
                         top = top > 0 ? 0 : top;
 
-                        this.$element.addClass('fixed');
+                        this.$element.addClass(this.options.fixedClass);
                         this.$content.css('top', top);
                     } else {
 
-                        this.$element.removeClass('fixed');
+                        this.$element.removeClass(this.options.fixedClass);
                         this.$content.css('top', 0);
+                    }
+
+                    if (scroll > this.minTop + this.height) {
+
+                        this.$element.addClass(this.options.outerClass);
+                    } else {
+
+                        this.$element.removeClass(this.options.outerClass);
                     }
 
                     this.lastTop = top;
@@ -298,6 +306,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             type: 'topped',
             speed: 1000,
             activeClass: 'active',
+            fixedClass: 'fixed',
+            outerClass: 'outer',
             threshold: 0,
             factor: 1
 

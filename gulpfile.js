@@ -15,7 +15,7 @@ const options = {
 
     js: {
 
-        source: `./src/js/${config.name}.js`,
+        source: `./src/${config.name}.js`,
         build: './dist/',
         devName: config.name + '.js',
         minName: config.name + '.min.js',

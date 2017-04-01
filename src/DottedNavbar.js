@@ -44,22 +44,22 @@ module.exports = class DottedNavbar extends BaseNavbar {
             if (scroll + middle > this.maxTop) {
 
                 this.$element
-                    .removeClass('fixed')
-                    .css('top', this.maxTop);
+                    .removeClass( this.options.fixedClass )
+                    .css( 'top', this.maxTop );
 
             } else {
 
                 this.$element
-                    .addClass('fixed')
-                    .css('top', middle);
+                    .addClass( this.options.fixedClass )
+                    .css( 'top', middle );
 
             }
 
         } else {
 
             this.$element
-                .removeClass('fixed')
-                .css('top', this.minTop);
+                .removeClass( this.options.fixedClass )
+                .css( 'top', this.minTop );
 
         }
 

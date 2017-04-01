@@ -32,6 +32,8 @@ $.fn.alfaNavbar.defaults = {
     type: 'topped',
     speed: 1000,
     activeClass: 'active',
+    fixedClass: 'fixed',
+    outerClass: 'outer',
     threshold: 0,
     factor: 1,
 
