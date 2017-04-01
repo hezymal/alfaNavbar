@@ -189,7 +189,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                     _get(DottedNavbar.prototype.__proto__ || Object.getPrototypeOf(DottedNavbar.prototype), "render", this).call(this);
 
-                    var css = {};
                     var scroll = this.scroll();
                     var middle = this.screenHeight / 2 - this.height / 2;
 
@@ -197,20 +196,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                         if (scroll + middle > this.maxTop) {
 
-                            css.position = 'absolute';
-                            css.top = this.maxTop;
+                            this.$element.removeClass('fixed').css('top', this.maxTop);
                         } else {
 
-                            css.position = 'fixed';
-                            css.top = middle;
+                            this.$element.addClass('fixed').css('top', middle);
                         }
                     } else {
 
-                        css.position = 'absolute';
-                        css.top = this.minTop;
+                        this.$element.removeClass('fixed').css('top', this.minTop);
                     }
-
-                    this.$element.css(css);
                 }
             }]);
 
@@ -233,8 +227,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 _this2.lastTop = 0;
                 _this2.minTop = 0;
                 _this2.height = 0;
-
-                _this2.$wrapper = _this2.$element.wrap('<div style="width: 100%"></div>').parent();
+                _this2.$content = _this2.$element.children().first();
 
                 return _this2;
             }
@@ -243,8 +236,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 key: "reset",
                 value: function reset() {
 
-                    this.minTop = this.$wrapper.offset().top;
-                    this.height = this.$element.outerHeight();
+                    this.minTop = this.$element.offset().top;
+                    this.height = this.$content.outerHeight();
 
                     _get(ToppedNavbar.prototype.__proto__ || Object.getPrototypeOf(ToppedNavbar.prototype), "reset", this).call(this);
                 }
@@ -263,12 +256,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         top = top < -this.height ? -this.height : top;
                         top = top > 0 ? 0 : top;
 
-                        this.$wrapper.css('padding-bottom', this.height);
-                        this.$element.css({ 'top': top, 'position': 'fixed' });
+                        this.$element.addClass('fixed');
+                        this.$content.css('top', top);
                     } else {
 
-                        this.$wrapper.css('padding-bottom', 0);
-                        this.$element.css('position', 'static');
+                        this.$element.removeClass('fixed');
+                        this.$content.css('top', 0);
                     }
 
                     this.lastTop = top;

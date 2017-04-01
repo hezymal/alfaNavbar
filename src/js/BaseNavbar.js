@@ -7,9 +7,9 @@ module.exports = class BaseNavbar {
 
     constructor(element, options) {
 
-        this.options    = options;
-        this.$element   = $(element);
-        this.$links     = this.$element.find('a');
+        this.options      = options;
+        this.$element     = $(element);
+        this.$links       = this.$element.find('a');
 
         if (!element.alfaNavbar) {
 

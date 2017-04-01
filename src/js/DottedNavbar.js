@@ -36,7 +36,6 @@ module.exports = class DottedNavbar extends BaseNavbar {
 
         super.render();
 
-        var css = {};
         var scroll = this.scroll();
         var middle = this.screenHeight / 2 - this.height / 2;
 
@@ -44,24 +43,25 @@ module.exports = class DottedNavbar extends BaseNavbar {
            
             if (scroll + middle > this.maxTop) {
 
-                css.position = 'absolute';
-                css.top = this.maxTop;
+                this.$element
+                    .removeClass('fixed')
+                    .css('top', this.maxTop);
 
             } else {
 
-                css.position = 'fixed';
-                css.top = middle;
+                this.$element
+                    .addClass('fixed')
+                    .css('top', middle);
 
             }
 
         } else {
 
-            css.position = 'absolute';
-            css.top = this.minTop;
+            this.$element
+                .removeClass('fixed')
+                .css('top', this.minTop);
 
         }
-
-        this.$element.css(css);
 
     }
 

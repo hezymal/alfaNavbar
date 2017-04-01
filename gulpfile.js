@@ -22,15 +22,6 @@ const options = {
 
     },
 
-    stylus: {
-
-        source: './src/stylus/**/*.styl',
-        build: './dist/',
-        devName: config.name + '.css',
-        minName: config.name + '.min.css',
-
-    }
-
 };
 
 
@@ -101,46 +92,13 @@ gulp.task('js-min', () => {
 
 
 
-gulp.task('stylus', () => {
-
-    const stylus = require('gulp-stylus');
-    const nib = require('nib');
-
-    return gulp
-        .src(options.stylus.source)
-        .pipe(stylus({ use: nib() }))
-        .on('error', console.error.bind(console))
-        .pipe(concat(options.stylus.devName))
-        .pipe(gulp.dest(options.stylus.build));
-});
-
-
-
-gulp.task('stylus-min', () => {
-
-    const stylus = require('gulp-stylus');
-    const nib = require('nib');
-    const csso = require('gulp-csso');
-
-    return gulp
-        .src(options.stylus.source)
-        .pipe(stylus({ use: nib() }))
-        .pipe(csso())
-        .pipe(concat(options.stylus.minName))
-        .pipe(gulp.dest(options.stylus.build));
-
-});
-
-
-
-gulp.task('watch', ['js', 'stylus'], () => {
+gulp.task('watch', ['js'], () => {
 
     gulp.watch(options.js.source, ['js']);
-    gulp.watch(options.stylus.source, ['stylus']);
 
 });
 
 
 
-gulp.task('build', ['clean', 'iterate', 'js', 'js-min', 'stylus', 'stylus-min']);
+gulp.task('build', ['clean', 'iterate', 'js', 'js-min']);
 gulp.task('default', ['clean', 'watch']);

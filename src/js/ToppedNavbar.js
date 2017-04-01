@@ -15,18 +15,15 @@ module.exports = class ToppedNavbar extends BaseNavbar {
         this.lastTop        = 0;
         this.minTop         = 0;
         this.height         = 0;
-
-        this.$wrapper       = this.$element
-            .wrap('<div style="width: 100%"></div>')
-            .parent();
+        this.$content       = this.$element.children().first();
 
     }
 
 
     reset() {
         
-        this.minTop  = this.$wrapper.offset().top;
-        this.height  = this.$element.outerHeight();
+        this.minTop  = this.$element.offset().top;
+        this.height  = this.$content.outerHeight();
 
         super.reset();
 
@@ -46,13 +43,13 @@ module.exports = class ToppedNavbar extends BaseNavbar {
             top = (top < -this.height)  ? -this.height  : top;
             top = (top > 0)             ? 0             : top;
 
-            this.$wrapper.css('padding-bottom', this.height);
-            this.$element.css({ 'top': top, 'position': 'fixed' });
+            this.$element.addClass('fixed');
+            this.$content.css('top', top);
 
         } else {
 
-            this.$wrapper.css('padding-bottom', 0);
-            this.$element.css('position', 'static');
+            this.$element.removeClass('fixed');
+            this.$content.css('top', 0);
             
         }
 

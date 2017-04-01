@@ -10,56 +10,154 @@
 
     <link href="../dist/alfaNavbar.css" rel="stylesheet"/>
     <style type="text/css">
-      body {
+
+      body 
+      {
         margin: 0;
         color: white;
       }
       
-      .block {
+      .block 
+      {
         text-align: center;
         line-height: 400px;
         height: 400px;
       }
 
-      .alfaTopNavbar {
+      /* EXAMPLE: TOP NAVBAR */
+
+      .topped.fixed 
+      {
+        height: 70px;
+      }
+
+        .topped.fixed .topped-content
+        {
+          position: fixed;
+        }
+
+      .topped-content
+      {
         box-sizing: border-box;
         background: #48f;
         padding: 10px;
         width: 100%;
       }
 
-      .alfaTopNavbar ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        .topped-content ul 
+        {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+
+        .topped-content ul:after 
+        {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        .topped-content li 
+        {
+          float: left;
+        }
+
+        .topped-content a 
+        {
+          display: block;
+          margin: 5px;
+          padding: 10px 30px;
+          color: #333;
+          text-decoration: none;
+          border-radius: 10px;
+          border: 1px solid white;
+        }
+
+        .topped-content .active,
+        .topped-content .hover 
+        {
+          background: #333;
+          border-color: rgba(255, 0, 0, 0.5);
+          color: #eee;
+        }
+
+      /* EXAMPLE: DOTTED NAVBAR */
+
+      .dotted.fixed
+      {
+        position: fixed;
       }
 
-      .alfaTopNavbar ul:after {
-        content: "";
-        display: table;
-        clear: both;
+      .dotted
+      {
+        position: absolute;
+        right: 5%;
       }
 
-      .alfaTopNavbar li {
-        float: left;
-      }
+        .dotted ul
+        {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }   
 
-      .alfaTopNavbar a {
-        display: block;
-        margin: 5px;
-        padding: 10px 30px;
-        color: #333;
-        text-decoration: none;
-        border-radius: 10px;
-        border: 1px solid white;
-      }
+        .dotted a
+        {
+          position: relative;
+          display: block;
+          width: 10px;
+          height: 10px;
+          margin: 40px 10px;
+          color: #333;
+          text-decoration: none;
+        }
 
-      .alfaTopNavbar .active,
-      .alfaTopNavbar .hover {
-        background: #333;
-        border-color: rgba(255, 0, 0, 0.5);
-        color: #eee;
-      }
+          .dotted a:before
+          {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #666;
+            border-radius: 50%;
+            transition: transform 1s;
+          }
+               
+          .dotted a:hover:before
+          {
+            transform: scale(1.6);
+            background-color: #08f;
+          }
+              
+          .dotted a:hover span
+          {
+            margin: 0;
+            visibility: visible;
+          }
+
+          .dotted a.active:before
+          {
+            background-color: #F66;
+          }
+              
+        .dotted span
+        {
+          position        : absolute;
+          right           : 30px;
+          width           : 300px;
+          height          : 10px;
+          line-height     : 10px;
+          text-align      : right;
+          visibility      : hidden;
+          /* for beautiful */
+          bottom          : 3px;
+          /* animation     */
+          margin-right    : 16px;
+          transition      : margin 0.3s linear;
+        }
+                
     </style>
 
 
@@ -69,25 +167,29 @@
 
     <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
     <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
-    <div class="alfaTopNavbar">
-      <ul>
-        <li><a href="#one">One</a></li>
-        <li><a href="#two">Two</a></li>
-        <li><a href="#three">Three</a></li>
-        <li><a href="#four">Four</a></li>
-        <li><a href="#five">Five</a></li>
-      </ul>
+    <div class="topped">
+      <div class="topped-content">
+        <ul>
+          <li><a href="#one">One</a></li>
+          <li><a href="#two">Two</a></li>
+          <li><a href="#three">Three</a></li>
+          <li><a href="#four">Four</a></li>
+          <li><a href="#five">Five</a></li>
+        </ul>
+      </div>
     </div>
     <div class="block" style="background-color: rgba(255, 0, 0, 0.5)"># OUT</div>
     <div>
-      <div class="alfaDotNavbar">
-        <ul>
-          <li><a href="#one"  ><span>One time</span></a></li>
-          <li><a href="#two"  ><span>Two</span></a></li>
-          <li><a href="#three"><span>Three</span></a></li>
-          <li><a href="#four" ><span>Four</span></a></li>
-          <li><a href="#five" ><span>Five</span></a></li>
-        </ul>
+      <div class="dotted">
+        <div class="dotted-content">
+          <ul>
+            <li><a href="#one"  ><span>One time</span></a></li>
+            <li><a href="#two"  ><span>Two</span></a></li>
+            <li><a href="#three"><span>Three</span></a></li>
+            <li><a href="#four" ><span>Four</span></a></li>
+            <li><a href="#five" ><span>Five</span></a></li>
+          </ul>
+        </div>
       </div>
       <div class="block" id="one"   style="background-color: rgba(255, 128, 0, 0.5)"># 1</div>
       <div class="block" id="two"   style="background-color: rgba(255, 0, 128, 0.5)"># 2</div>
@@ -104,8 +206,8 @@
     <script src="../dist/alfaNavbar.js"></script>
     <script type="text/javascript">
       
-      $('.alfaDotNavbar').alfaNavbar({ type: 'dotted', threshold: 'center' });
-      $('.alfaTopNavbar').alfaNavbar({ type: 'topped', threshold: 'center' });
+      $('.dotted').alfaNavbar({ type: 'dotted', threshold: 'center' });
+      $('.topped').alfaNavbar({ type: 'topped', threshold: 'center' });
 
       $(window).keydown(function(event) {
 
