@@ -264,12 +264,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         this.$content.css('top', 0);
                     }
 
-                    if (scroll > this.minTop + this.height) {
+                    if (scroll > this.lastScrolled) {
 
-                        this.$element.addClass(this.options.outerClass);
-                    } else {
+                        if (scroll > this.minTop + this.height) {
 
-                        this.$element.removeClass(this.options.outerClass);
+                            this.$element.addClass(this.options.outerClass);
+                        } else {
+
+                            this.$element.removeClass(this.options.outerClass);
+                        }
+                    } else if (this.$element.hasClass(this.options.outerClass)) {
+
+                        if (scroll > this.minTop) {
+
+                            this.$element.addClass(this.options.outerClass);
+                        } else {
+
+                            this.$element.removeClass(this.options.outerClass);
+                        }
                     }
 
                     this.lastTop = top;

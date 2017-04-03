@@ -53,13 +53,29 @@ module.exports = class ToppedNavbar extends BaseNavbar {
             
         }
 
-        if ( scroll > this.minTop + this.height ) {
+        if (scroll > this.lastScrolled) {
 
-            this.$element.addClass( this.options.outerClass );
+            if (scroll > this.minTop + this.height) {
 
-        } else { 
+                this.$element.addClass(this.options.outerClass);
 
-            this.$element.removeClass( this.options.outerClass );
+            } else {
+
+                this.$element.removeClass(this.options.outerClass);
+
+            }
+
+        } else if (this.$element.hasClass(this.options.outerClass)) {
+
+            if (scroll > this.minTop) {
+
+                this.$element.addClass(this.options.outerClass);
+
+            } else {
+
+                this.$element.removeClass(this.options.outerClass);
+
+            }
 
         }
 
